@@ -39,9 +39,9 @@ class AdjListGraph:
         if vertex not in self.adj_list:
             self.adj_list[vertex] = []
 
-    def add_edge(self,src,dest):
+    def add_edge(self,src,dest, weight=1):
         if src in self.adj_list:
-            self.adj_list[src].append(dest)
+            self.adj_list[src].append(dest, weight)
         else:
             raise ValueError(f"Source vertex {src} not in graph ")
 
@@ -49,6 +49,12 @@ class AdjListGraph:
         if src in self.adj_list:
             if dest in self.adj_list[src]:
                 self.adj_list[src].remove(dest)
+
+    def get_neighbors(self, vertex)-> list:
+        return self.adj_list.get(vertex, [])
+
+    def get_nodes(self)-> list:
+        return list(self.adj_list.keys())
 
     def dfs(self, src, visited= None, key=print):
         if not visited:
